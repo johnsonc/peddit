@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Let's get cookin'{% endblock %}
+
+{% block content %}
+<ul>
+
+{% for link in links %}
+  <li>
+    {% include "link.html" %}
+    {% include "link_controls.html" %}
+
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

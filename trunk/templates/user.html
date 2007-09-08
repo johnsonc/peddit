@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}User - {{ user.username }}{% endblock %}
+
+{% block content %}
+
+{% if otherprofile %}
+<div id="umenu">
+  <ul id="unav">
+   <li><a href="/user/{{ user_name }}/">Submitted </a></li>
+   <li><a href="/user/{{ user_name }}/saved/">Saved </a></li>
+   <li><a href="/user/{{ user_name }}/liked/">Liked </a></li>
+   <li><a href="/user/{{ user_name }}/disliked/">Disliked</a></li>
+   <li><a href="/user/{{ user_name }}/comments/">Comments</a></li>
+  </ul>
+</div>
+{% endif %}
+<br />
+
+<h3>
+	{{subtitle}}
+</h3>
+
+<ul>
+{% for link in links %}
+  <li>
+    {% include "link.html" %}
+    {% include "link_controls.html" %}
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

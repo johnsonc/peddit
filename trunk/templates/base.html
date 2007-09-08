@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<!-- Dependency -->
+<script src="http://yui.yahooapis.com/2.3.0/build/yahoo/yahoo-min.js"></script>
+
+<!-- Used for Custom Events and event listener bindings -->
+<script src="http://yui.yahooapis.com/2.3.0/build/event/event-min.js"></script>
+
+<!-- Source file -->
+<script src="http://yui.yahooapis.com/2.3.0/build/connection/connection-min.js"></script>
+
+<!-- Source file -->
+<script src="http://yui.yahooapis.com/2.3.0/build/dom/dom-min.js"></script>
+
+<script src="/js/modhandler.js">
+
+
+    <title>{% block title %}What's new online{% endblock %}</title>
+
+	<link rel="stylesheet" type="text/css" href="/foo/style.css" media="screen" />
+
+
+</head>
+
+<body>
+<div id="header">
+<h1>What's cookin'</h1>
+ <div id="menu">
+  <ul id="nav">
+   <li><a href="/">home</a></li>
+   <li><a href="/submit/">submit</a></li>
+   <li>			 
+				 {% if user.is_authenticated %}
+				 <a href="/accounts/logout/">logout</a>
+				 {% else %}
+				 <a href="/accounts/login/">login</a>
+				 {% endif %}
+  </li>
+     
+				 {% if user.is_authenticated %}
+				 <li>
+				 <a href="/accounts/profile/">profile</a>
+				 </li>
+				 {% endif %}
+  </ul>
+ </div>
+</div>
+
+	<div id="left">
+
+			
+	<div class="box">
+	<strong>
+	{% if user.is_authenticated %}
+	Howdy {{ user.username }} ?
+	<br />
+    <br />
+    {% block sidebar %}
+    <ul>
+	  <li> 
+	  <a href="/accounts/profile/">
+	  submitted
+	  </a>
+	  </li>
+	  <li> 
+	  <a href="/accounts/profile/saved/">
+	  saved
+	  </a>
+	  </li>
+	  <li>
+	  <a href="/accounts/profile/liked/">
+	  liked
+	  </a>
+	  </li>
+	  <li>
+	  <a href="/accounts/profile/disliked/">
+	  disliked
+	  </a>
+	  </li>
+	  <li>
+	  <a href="/accounts/profile/comments/">
+	  comments
+	  </a>
+	  </li>
+    </ul>
+    {% endblock %}
+	{% else %}
+    Hey guest. <br />
+    <a href="/accounts/login/">login</a> or
+	<a href="/register/">register</a>
+	{% endif %}
+	</strong>
+	</div>
+		
+	</div>
+
+    <div id="content">
+
+        {% block content %}{% endblock %}
+    </div>
+	<div id="footernav">
+
+	{% block footernav %}
+	<span class="fnav">
+	{% if page.has_prev %}
+	<a href="{{ request.path }}?offset={{page.prev}}">&laquo;prev</a>
+	{% endif %}
+	</span>
+	<span class="fnav">
+	{% if page.has_next %}
+	<a href="{{ request.path }}?offset={{page.next}}">next&raquo;</a>
+	{% endif %}
+	{% endblock %}
+	</span>
+
+	</div>
+
+	{% block footer %}
+	<div id="footer">
+	<a href="/help/">help</a>
+	{% block feed %}
+	<a href="/feeds/latest/">feed</a>
+	{%endblock%}
+    </div>
+	{% endblock %}
+</body>
+</html>

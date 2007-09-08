@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="umenu">
+  <ul id="unav">
+   <li><a href="#">Submitted </a></li>
+   <li><a href="#">Submitted </a></li>
+   <li><a href="#">Liked </a></li>
+   <li><a href="#">Disliked</a></li>
+   <li><a href="#">Comments</a></li>
+  </ul>
+</div>
+<br />
+<h3>
+	{{subtitle}}
+</h3>
+<ul>
+ {% for comment in comments %}
+     <li>
+	 {% include "comments.html" %} {% include "comment_controls.html" %}
+	 </li>
+{% endfor %}	
+</ul>
+{% endblock %}
