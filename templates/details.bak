@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ link.text }}{% endblock %}
+{% load humanize %}
+
+{% block content %}
+
+    <h3>
+	<a href="{{link.link}}"> {{ link.text }} </a>
+	</h3>
+	<a href="#" id="uplink{{link.id}}" onclick="mod_link({{link.id}}, 1)">upvote</a>,
+	<a href="#" id="downlink{{link.id}}" onclick="mod_link({{link.id}}, 0)">downvote</a>
+	<br />
+	{{ link.points|apnumber}} points added {{link.time_elapsed}} ago, by 
+	<a href="/user/{{link.user.username}}/" class="user">{{link.user.username}}</a>
+	<br />
+
+{{comment_form}}
+
+<ul>
+{% for comment in comments %}
+  <li>
+     {{ comment.text }} by {{ comment.user.username }}
+	</li>
+{% endfor %}
+</ul>
+{% endblock %}

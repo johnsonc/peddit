@@ -1,0 +1,13 @@
+    <div class="linkrow">
+	{% if link.upvoted %}
+	<a href="#" id="uplink{{link.id}}" onclick="mod_link({{link.id}}, 1)"><img src="/foo/upped.png" id="uplink{{link.id}}img" /></a>
+	{% else %}
+    <a href="#" id="uplink{{link.id}}" onclick="mod_link({{link.id}}, 1)"><img src="/foo/up.png" id="uplink{{link.id}}img" /></a>
+	{% endif %}
+    <a href="#" id="downlink{{link.id}}" onclick="mod_link({{link.id}}, 0)"><img src="/foo/down.png" id="downlink{{link.id}}img" /></a>
+    <strong>
+    <a href="{{link.link}}"> {{ link.text }} </a>
+    </strong>
+	<span class="linkdomain">({{link.domain}})</span>
+    <br />
+	</div>

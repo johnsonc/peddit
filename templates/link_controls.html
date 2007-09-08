@@ -1,0 +1,12 @@
+{% load humanize %}   
+    <div class="controls">
+	{{ link.points|apnumber}} points added {{link.time_elapsed}} ago, by 
+	<a href="/user/{{link.user.username}}/" class="user">{{link.user.username}}</a>
+	<a href="/details/{{ link.id }}/">{{link.num_comments}} comments</a> 
+	{% if not link.saved %}
+	<span id="save{{link.id}}"><a href="#" class="savelink"  onclick="save_link({{link.id}})">save this</a></span>
+	{% else %}
+    <span id="save{{link.id}}">saved</span>
+	{% endif %}
+	<br />
+   </div>

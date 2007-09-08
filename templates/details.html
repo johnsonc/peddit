@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ link.text }}{% endblock %}
+
+{% block content %}
+
+<div class="tags">
+<strong>
+Tags:
+</strong>
+<ul>
+
+{% for tag in tags %}
+<li>
+<a href="{{tag.get_absolute_url}}" class="taglink">
+{{ tag.tag }}
+</a>
+</li>
+{%endfor %}
+
+</ul>
+
+
+{% if user.is_authenticated %}
+<form method="post" action=".">
+<table>{{ tag_form }}</table>
+<button class='btn' type='submit'>Tag it</button>
+</form>
+{%endif%}
+
+</div>
+    {% include "link.html" %}
+    {% include "link_controls.html" %}
+
+{% if user.is_authenticated %}
+<form method="post" action=".">
+<table>{{comment_form}}</table>
+<button class='btn' type='submit'>Comment</button>
+</form>
+{% else %}
+
+<form method="post" action=".">
+<table><tr><th><label for="id_text">Text:</label></th><td><textarea name="text" id="id_text" readonly='readonly'>Please login to submit a comment</textarea></td></tr></table>
+<button class='btn' type='submit' disabled='disabled'>Comment</button>
+</form>
+
+{% endif %}
+
+
+<ul>
+{% for comment in comments %}
+  <li>
+     {% include "comments.html" %} {% include "comment_controls.html" %}
+	</li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block feed %}
+	<a href="/feeds/details/{{link_id}}/">feed</a>
+{%endblock%}
